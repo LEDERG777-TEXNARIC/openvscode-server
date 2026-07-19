@@ -1,3 +1,5 @@
-FROM gitpod/openvscode-server
-ENTRYPOINT [ "/bin/sh", "-c", "/home/openvscode-server-v$OPENVSCODE_SERVER_VERSION-linux-x64/server.sh" ]
+FROM gitpod/openvscode-server:latest-nonchromium
+USER root
+RUN [ "/bin/sh", "-c", "ln -s /home/openvscode-server-v*/server.sh /home/server.sh"]
 USER vscode-server
+ENTRYPOINT [ "/bin/sh", "-c", "/home/server.sh"]
